@@ -4,6 +4,11 @@ import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
 import axios from "axios";
 
+axios.defaults.withCredentials = true;
+axios.defaults.headers.common["Accept"] = "application/json";
+axios.defaults.headers.common["Content-Type"] = "application/json";
+
+
 export const OrderStatus = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
