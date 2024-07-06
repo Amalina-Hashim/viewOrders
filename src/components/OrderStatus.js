@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
+import Spinner from "react-bootstrap/Spinner";
 import axios from "axios";
 
 axios.defaults.withCredentials = true;
 axios.defaults.headers.common["Accept"] = "application/json";
 axios.defaults.headers.common["Content-Type"] = "application/json";
-
 
 export const OrderStatus = () => {
   const [orders, setOrders] = useState([]);
@@ -29,10 +29,10 @@ export const OrderStatus = () => {
         });
     };
 
-    fetchOrders(); 
-    const interval = setInterval(fetchOrders, 10000); 
+    fetchOrders();
+    const interval = setInterval(fetchOrders, 10000);
 
-    return () => clearInterval(interval); 
+    return () => clearInterval(interval);
   }, []);
 
   const handleMarkAsShipped = (orderId) => {
@@ -61,7 +61,11 @@ export const OrderStatus = () => {
   return (
     <div>
       {loading ? (
-        <p>Loading...</p>
+        <div className="text-center my-5">
+          <Spinner animation="border" role="status">
+            <span className="sr-only">Loading...</span>
+          </Spinner>
+        </div>
       ) : (
         orders.map((order) => (
           <Card
